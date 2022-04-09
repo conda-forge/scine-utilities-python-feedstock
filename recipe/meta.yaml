@@ -19,8 +19,8 @@ source:
       - pybind11_pin.patch
 
 build:
-  number: 1
-  skip: true  # [win or osx]
+  number: 2
+  skip: true  # [win]
   script:
     - set -ex
     - >
