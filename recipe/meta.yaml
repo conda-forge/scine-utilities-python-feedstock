@@ -1,5 +1,5 @@
 {% set name = "scine-utilities-python" %}
-{% set version = "4.0.0" %}
+{% set version = "5.0.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/qcscine/utilities/archive/refs/tags/{{ version }}.tar.gz
-    sha256: 3bcabd8f4270f0c1efd235a0d22506f4750b0ccffa99184d4362b95a1da7a1d4
+    sha256: a304c89d9a196fe304f38610dea6b066d74590c0d434e4bd09a9796340700465
     fn: {{ name }}.tar.gz
     patches:
       - skip_library_build.patch
@@ -19,19 +19,12 @@ source:
       - pybind11_pin.patch
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
   script:
     - set -ex
     - >
-       cmake
-       ${CMAKE_ARGS}
-       -B _build -G Ninja
-       -DPYTHON_EXECUTABLE={{ PYTHON }}
-       -DSCINE_MARCH=""
-       -DSCINE_SKIP_LIBRARY=ON
-       -DSCINE_BUILD_TESTS=OFF
-       -DSCINE_BUILD_PYTHON_BINDINGS=ON
+      cmake ${CMAKE_ARGS} -B _build -G Ninja -DPYTHON_EXECUTABLE={{ PYTHON }} -DSCINE_MARCH="" -DSCINE_SKIP_LIBRARY=ON -DSCINE_BUILD_TESTS=OFF -DSCINE_BUILD_PYTHON_BINDINGS=ON
     - cmake --build _build
     - cmake --install _build
 
