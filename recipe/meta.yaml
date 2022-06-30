@@ -11,8 +11,8 @@ source:
     fn: {{ name }}.tar.gz
     patches:
       - skip_library_build.patch
-  - url: https://github.com/qcscine/development-utils/archive/refs/tags/4.0.0.tar.gz
-    sha256: 54002c2082b6bb75672ec66bf9cf3935bbdf6b085ed9b4d7174cbdedb7c2275d
+  - url: https://github.com/qcscine/development-utils/archive/refs/tags/5.0.0.tar.gz
+    sha256: bb2f161ed15811def85ca635924427356564a811779993123077f4ada048be84
     fn: dev.tar.gz
     folder: dev
     patches:
@@ -21,12 +21,6 @@ source:
 build:
   number: 0
   skip: true  # [win]
-  script:
-    - set -ex
-    - >
-      cmake ${CMAKE_ARGS} -B _build -G Ninja -DPYTHON_EXECUTABLE={{ PYTHON }} -DSCINE_MARCH="" -DSCINE_SKIP_LIBRARY=ON -DSCINE_BUILD_TESTS=OFF -DSCINE_BUILD_PYTHON_BINDINGS=ON
-    - cmake --build _build
-    - cmake --install _build
 
 requirements:
   build:
@@ -42,6 +36,7 @@ requirements:
     - eigen
     - gtest
     - gmock
+    - lbfgspp
     - libblas
     - pip
     - pybind11
