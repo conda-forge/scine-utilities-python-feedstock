@@ -1,8 +1,8 @@
 diff --git a/src/Utils/CMakeLists.txt b/src/Utils/CMakeLists.txt
-index f435593..cfc8fb7 100644
+index 85bc41c..d8753d5 100644
 --- a/src/Utils/CMakeLists.txt
 +++ b/src/Utils/CMakeLists.txt
-@@ -29,6 +29,7 @@ if(SCINE_PARALLELIZE)
+@@ -31,6 +31,7 @@ if(SCINE_PARALLELIZE)
    find_package(OpenMP REQUIRED)
  endif()
  
@@ -10,7 +10,7 @@ index f435593..cfc8fb7 100644
  # Obey standard CMake behavior regarding shared/static libraries
  add_library(UtilsOS ${UTILS_HEADERS} ${UTILS_CPPS})
  if(NOT BUILD_SHARED_LIBS)
-@@ -119,6 +120,10 @@ if(SCINE_BUILD_TESTS)
+@@ -122,6 +123,10 @@ if(SCINE_BUILD_TESTS)
      DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
    )
  endif()
@@ -21,10 +21,10 @@ index f435593..cfc8fb7 100644
  
  # Python bindings
  if(SCINE_BUILD_PYTHON_BINDINGS)
-@@ -164,11 +169,13 @@ if(SCINE_BUILD_PYTHON_BINDINGS)
-     ${CMAKE_CURRENT_BINARY_DIR}/scine_utilities/__init__.py
+@@ -170,11 +175,13 @@ if(SCINE_BUILD_PYTHON_BINDINGS)
+     COPY ${PROJECT_SOURCE_DIR}/README.rst
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}
    )
-   file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Python/README.rst DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 +  if(NOT SCINE_SKIP_LIBRARY)
    add_custom_command(TARGET UtilsOSModule POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:UtilsOSModule> ${CMAKE_CURRENT_BINARY_DIR}/scine_utilities
@@ -35,7 +35,7 @@ index f435593..cfc8fb7 100644
  
    # Figure out which targets need to be copied along
    set(_py_targets_to_copy Scine::Core)  # Core is always shared
-@@ -187,11 +194,13 @@ if(SCINE_BUILD_PYTHON_BINDINGS)
+@@ -193,11 +200,13 @@ if(SCINE_BUILD_PYTHON_BINDINGS)
      string(APPEND utils_PY_DEPS ", \"${_target_filename}\"")
    endforeach()
  
@@ -49,7 +49,7 @@ index f435593..cfc8fb7 100644
    unset(_py_targets_to_copy)
  
    # Typing stubs
-@@ -227,10 +236,12 @@ if(SCINE_BUILD_PYTHON_BINDINGS)
+@@ -233,10 +242,12 @@ if(SCINE_BUILD_PYTHON_BINDINGS)
      OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/doc-py
      DOCTEST
    )
