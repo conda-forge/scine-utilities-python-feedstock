@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -ex
 
+git submodule init
+git submodule update
+
 cmake \
     ${CMAKE_ARGS} \
     -B _build -G Ninja \
