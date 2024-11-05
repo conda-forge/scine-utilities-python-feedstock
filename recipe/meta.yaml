@@ -1,5 +1,5 @@
 {% set name = "scine-utilities-python" %}
-{% set version = "6.0.0" %}
+{% set version = "10.0.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/qcscine/utilities/archive/refs/tags/{{ version }}.tar.gz
-    sha256: e4387d5562b7442a8e31e4dfc028bacfeb6d12e39f2d8aa6effc6db380863b4a
+    sha256: 326ab2a112e38505910d4abda32ef852cd5d14991d6777cc891d45d4f071c86e
     fn: {{ name }}.tar.gz
     patches:
       - skip_library_build.patch
@@ -19,12 +19,13 @@ source:
       - pybind11_pin.patch
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - cmake
     - ninja
