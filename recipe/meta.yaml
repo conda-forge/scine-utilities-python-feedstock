@@ -48,6 +48,7 @@ requirements:
     - python
     - scine-core
     - scine-utilsos {{ version }}
+    - setuptools
     - yaml-cpp
   run:
     - numpy
