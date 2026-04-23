@@ -19,12 +19,13 @@ source:
       - pybind11_pin.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - cmake
     - ninja
@@ -47,6 +48,7 @@ requirements:
     - python
     - scine-core
     - scine-utilsos {{ version }}
+    - setuptools
     - yaml-cpp
   run:
     - numpy
